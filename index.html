@@ -105,18 +105,16 @@
     </form>
     <p id="status"></p>
 </div>
-
 <script>
-    // SATU URL UNTUK SEMUA (Pastikan ini URL Deployment terbarumu)
+    // MASUKKAN URL WEB APP TERBARUMU DI SINI
     const scriptURL = 'https://script.google.com/macros/s/AKfycbx9Ih2fg3ohU50nOTmCgF-F9F21f5YScaJP6DtAZiKArvupIXZhpsKtzagi19U2GBeEGA/exec'; 
     
     const form = document.getElementById('financeForm');
     const statusText = document.getElementById('status');
     const submitBtn = document.getElementById('submitBtn');
 
-    // 1. FUNGSI UNTUK MENARIK DATA SALDO
     function muatSaldo() {
-        document.getElementById('val-sisa').innerText = "Memuat..."; // Indikator loading
+        document.getElementById('val-sisa').innerText = "Memuat..."; 
         
         fetch(scriptURL)
             .then(response => response.json())
@@ -131,14 +129,11 @@
             });
     }
 
-    // Panggil fungsi tarik saldo saat web pertama kali dibuka
     muatSaldo();
 
-    // 2. FUNGSI UNTUK MENGIRIM DATA TRANSAKSI BARU
     form.addEventListener('submit', e => {
         e.preventDefault();
         
-        // Ubah tampilan tombol saat loading
         submitBtn.innerHTML = "Menyinkronkan...";
         submitBtn.style.background = "#64748b";
         statusText.innerHTML = "";
@@ -153,14 +148,14 @@
             method: 'POST',
             body: JSON.stringify(data)
         })
-        .then(response => {
+        .then(response => response.json()) // Tambahan untuk memastikan respon dibaca dengan benar
+        .then(result => {
             submitBtn.innerHTML = "Simpan Transaksi";
             submitBtn.style.background = "var(--primary)";
             statusText.innerHTML = "✅ Data berhasil masuk ke Google Sheets!";
             statusText.style.color = "#10b981";
-            form.reset(); // Mengosongkan form otomatis
+            form.reset(); 
             
-            // UPDATE SALDO OTOMATIS SETELAH DATA MASUK
             muatSaldo(); 
         })
         .catch(error => {

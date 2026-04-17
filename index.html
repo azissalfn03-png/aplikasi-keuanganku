@@ -107,12 +107,35 @@
 </div>
 
 <script>
-    // MASUKKAN URL WEB APP BARU KAMU DI SINI (Pastikan pakai URL dari "New Version")
+    <script>
+    // SATU URL UNTUK SEMUA (Pastikan ini URL Deployment terbarumu)
     const scriptURL = 'https://script.google.com/macros/s/AKfycbxryLV8dJIxpvNDa7pVaL_QBMw3An3jXhEKFZhz5ulO7Kw7T4m99rW0khfkdmbdCd9n8A/exec'; 
+    
     const form = document.getElementById('financeForm');
     const statusText = document.getElementById('status');
     const submitBtn = document.getElementById('submitBtn');
 
+    // 1. FUNGSI UNTUK MENARIK DATA SALDO
+    function muatSaldo() {
+        document.getElementById('val-sisa').innerText = "Memuat..."; // Indikator loading
+        
+        fetch(scriptURL)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('val-masuk').innerText = data.pemasukan.toLocaleString('id-ID');
+                document.getElementById('val-keluar').innerText = data.pengeluaran.toLocaleString('id-ID');
+                document.getElementById('val-sisa').innerText = data.sisa.toLocaleString('id-ID');
+            })
+            .catch(error => {
+                console.error('Gagal memuat saldo:', error);
+                document.getElementById('val-sisa').innerText = "Error";
+            });
+    }
+
+    // Panggil fungsi tarik saldo saat web pertama kali dibuka
+    muatSaldo();
+
+    // 2. FUNGSI UNTUK MENGIRIM DATA TRANSAKSI BARU
     form.addEventListener('submit', e => {
         e.preventDefault();
         
@@ -120,7 +143,6 @@
         submitBtn.innerHTML = "Menyinkronkan...";
         submitBtn.style.background = "#64748b";
         statusText.innerHTML = "";
-        statusText.style.color = "white";
         
         const data = {
             keterangan: document.getElementById('keterangan').value,
@@ -138,6 +160,9 @@
             statusText.innerHTML = "✅ Data berhasil masuk ke Google Sheets!";
             statusText.style.color = "#10b981";
             form.reset(); // Mengosongkan form otomatis
+            
+            // UPDATE SALDO OTOMATIS SETELAH DATA MASUK
+            muatSaldo(); 
         })
         .catch(error => {
             submitBtn.innerHTML = "Simpan Transaksi";
@@ -146,27 +171,7 @@
             statusText.style.color = "#ef4444";
         });
     });
-    // GANTI TULISAN DI BAWAH DENGAN URL DEPLOYMENT YANG BARU KAMU DAPATKAN
-const URL_API = 'https://script.google.com/macros/s/AKfycbxyz.../exec';
-
-// Fungsi untuk menarik data saldo
-function muatSaldo() {
-    fetch(URL_API)
-        .then(response => response.json())
-        .then(data => {
-            // Format angka biar ada titiknya (misal 10000 jadi 10.000)
-            document.getElementById('val-masuk').innerText = data.pemasukan.toLocaleString('id-ID');
-            document.getElementById('val-keluar').innerText = data.pengeluaran.toLocaleString('id-ID');
-            document.getElementById('val-sisa').innerText = data.sisa.toLocaleString('id-ID');
-        })
-        .catch(error => {
-            console.error('Gagal memuat saldo:', error);
-            document.getElementById('val-sisa').innerText = "Error";
-        });
-}
-
-// Panggil fungsinya langsung saat web pertama kali dibuka
-muatSaldo();
+</script>
 </script>
 
 </body>

@@ -22,3 +22,35 @@ function showToast(message, type = "success") {
         setTimeout(() => toast.remove(), 300);
     }, 3000);
 }
+// ==========================================
+// FUNGSI NAVIGASI RESPONSIVE (MOBILE MENU)
+// ==========================================
+document.addEventListener('DOMContentLoaded', () => {
+    const sidebar = document.getElementById('sidebar');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const closeSidebarBtn = document.getElementById('closeSidebarBtn');
+
+    // Fungsi untuk membuka/menutup sidebar
+    function toggleSidebar() {
+        if (sidebar && sidebarOverlay) {
+            // Tailwind memanipulasi posisi X menggunakan class translate
+            sidebar.classList.toggle('-translate-x-full');
+            sidebarOverlay.classList.toggle('hidden');
+        }
+    }
+
+    // Pasang fungsi klik ke tombol-tombol yang ada
+    if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', toggleSidebar);
+    }
+    
+    if (closeSidebarBtn) {
+        closeSidebarBtn.addEventListener('click', toggleSidebar);
+    }
+
+    // Tutup menu jika user mengklik area gelap di luar menu
+    if (sidebarOverlay) {
+        sidebarOverlay.addEventListener('click', toggleSidebar);
+    }
+});

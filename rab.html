@@ -8,94 +8,150 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="bg-slate-900 text-slate-100 font-poppins flex h-screen">
+<body class="bg-slate-900 text-slate-100 font-poppins flex h-screen overflow-hidden">
 
-    <!-- Sidebar Navigasi -->
-    <aside class="w-64 bg-slate-800 p-6 flex flex-col space-y-4">
-        <h1 class="text-2xl font-bold text-emerald-400 mb-6">FinDash.</h1>
-        <a href="index.html" class="p-3 hover:bg-slate-700 rounded transition">📊 Dashboard</a>
-        <a href="transaksi.html" class="p-3 hover:bg-slate-700 rounded transition">💸 Catat Transaksi</a>
-        <a href="rab.html" class="p-3 bg-emerald-500 rounded text-white font-semibold">📋 Rencana Anggaran</a>
-        <a href="laporan.html" class="p-3 hover:bg-slate-700 rounded transition">📈 Analisis & Laporan</a>
-        <a href="riwayat.html" class="p-3 hover:bg-slate-700 rounded transition">🕰️ Riwayat Transaksi</a>
+    <aside class="w-20 lg:w-64 bg-slate-800 flex flex-col flex-shrink-0 transition-all duration-300 ease-in-out border-r border-slate-700 z-40">
+        <div class="p-4 lg:p-6 flex justify-center lg:justify-start items-center mb-4 border-b border-slate-700/50">
+            <h1 class="text-2xl font-bold text-emerald-400 hidden lg:block">FinDash.</h1>
+            <h1 class="text-2xl font-bold text-emerald-400 lg:hidden">F.</h1>
+        </div>
+        <nav class="flex flex-col space-y-3 px-2 lg:px-4">
+            <a href="index.html" class="p-3 hover:bg-slate-700 rounded-xl transition flex items-center justify-center lg:justify-start gap-4 group">
+                <span class="text-xl group-hover:scale-110 transition-transform">📊</span>
+                <span class="hidden lg:block font-medium">Dashboard</span>
+            </a>
+            <a href="transaksi.html" class="p-3 hover:bg-slate-700 rounded-xl transition flex items-center justify-center lg:justify-start gap-4 group">
+                <span class="text-xl group-hover:scale-110 transition-transform">💸</span>
+                <span class="hidden lg:block font-medium">Catat Transaksi</span>
+            </a>
+            <!-- AKTIF DI HALAMAN INI -->
+            <a href="rab.html" class="p-3 bg-emerald-500 text-white shadow-lg shadow-emerald-500/20 rounded-xl transition flex items-center justify-center lg:justify-start gap-4 group">
+                <span class="text-xl">📋</span>
+                <span class="hidden lg:block font-medium">Rencana Anggaran</span>
+            </a>
+            <a href="laporan.html" class="p-3 hover:bg-slate-700 rounded-xl transition flex items-center justify-center lg:justify-start gap-4 group">
+                <span class="text-xl group-hover:scale-110 transition-transform">📈</span>
+                <span class="hidden lg:block font-medium">Analisis & Laporan</span>
+            </a>
+            <a href="riwayat.html" class="p-3 hover:bg-slate-700 rounded-xl transition flex items-center justify-center lg:justify-start gap-4 group">
+                <span class="text-xl group-hover:scale-110 transition-transform">🕰️</span>
+                <span class="hidden lg:block font-medium">Riwayat Transaksi</span>
+            </a>
+        </nav>
     </aside>
 
-    <main class="flex-1 p-10 overflow-y-auto">
-        <div class="max-w-5xl mx-auto">
-            <h2 class="text-3xl font-semibold mb-6">Setup Anggaran Terperinci</h2>
-            
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <!-- Form Input RAB Detail -->
-                <div class="bg-slate-800 p-6 rounded-xl shadow-lg h-fit">
-                    <form id="rabForm" class="space-y-4">
-                        <div>
-                            <label class="block text-sm text-slate-400 mb-1">Kategori</label>
-                            <select id="rabKategori" class="w-full p-3 rounded-lg bg-slate-900 border border-slate-700 focus:border-emerald-500 focus:outline-none">
-                                <option value="kebutuhan_harian">Kebutuhan Harian</option>
-                                <option value="pengalaman_baru">Dana Pengalaman Baru</option>
-                                <option value="operasional_bisnis">Operasional Bisnis</option>
-                                <option value="kebutuhan_rumah">Kebutuhan Rumah</option>
-                                <option value="KULIAH">Kuliah</option>
-                                <option value="Pribadi">Pribadi</option>
-                            </select>
-                        </div>
-                        
-                        <div>
-                            <label class="block text-sm text-slate-400 mb-1">Nama Item (Opsional)</label>
-                            <input type="text" id="rabItem" class="w-full p-3 rounded-lg bg-slate-900 border border-slate-700 focus:border-emerald-500 focus:outline-none" placeholder="Cth: Sewa Lensa / Beli Saldo">
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-4">
+    <main class="flex-1 flex flex-col min-w-0 bg-slate-900 overflow-hidden relative">
+        <div class="flex-1 p-4 md:p-8 overflow-y-auto overflow-x-hidden">
+            <div class="max-w-5xl mx-auto w-full">
+                
+                <h2 class="text-3xl font-semibold mb-6">Setup Anggaran Terperinci</h2>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <div class="bg-slate-800 p-6 rounded-xl shadow-lg h-fit">
+                        <form id="rabForm" class="space-y-4">
                             <div>
-                                <label class="block text-sm text-slate-400 mb-1">Qty</label>
-                                <input type="number" id="rabQty" class="w-full p-3 rounded-lg bg-slate-900 border border-slate-700 focus:border-emerald-500 focus:outline-none" placeholder="1" min="1" required>
+                                <label class="block text-sm text-slate-400 mb-1">Kategori</label>
+                                <select id="rabKategori" class="w-full p-3 rounded-lg bg-slate-900 border border-slate-700 focus:border-emerald-500 focus:outline-none">
+                                    <option value="kebutuhan_harian">Kebutuhan Harian</option>
+                                    <option value="pengalaman_baru">Dana Pengalaman Baru</option>
+                                    <option value="operasional_bisnis">Operasional Bisnis</option>
+                                    <option value="kebutuhan_rumah">Kebutuhan Rumah</option>
+                                    <option value="KULIAH">Kuliah</option>
+                                    <option value="Pribadi">Pribadi</option>
+                                </select>
                             </div>
                             <div>
-                                <label class="block text-sm text-slate-400 mb-1">Harga per @ (Rp)</label>
-                                <input type="number" id="rabHarga" class="w-full p-3 rounded-lg bg-slate-900 border border-slate-700 focus:border-emerald-500 focus:outline-none" placeholder="50000" required>
+                                <label class="block text-sm text-slate-400 mb-1">Nama Item (Opsional)</label>
+                                <input type="text" id="rabItem" class="w-full p-3 rounded-lg bg-slate-900 border border-slate-700 focus:border-emerald-500 focus:outline-none" placeholder="Cth: Sewa Lensa / Beli Saldo">
                             </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm text-slate-400 mb-1">Qty</label>
+                                    <input type="number" id="rabQty" class="w-full p-3 rounded-lg bg-slate-900 border border-slate-700 focus:border-emerald-500 focus:outline-none" placeholder="1" min="1" required>
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-slate-400 mb-1">Harga per @ (Rp)</label>
+                                    <input type="number" id="rabHarga" class="w-full p-3 rounded-lg bg-slate-900 border border-slate-700 focus:border-emerald-500 focus:outline-none" placeholder="50000" required>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm text-emerald-400 mb-1 font-semibold">Total Anggaran (Otomatis)</label>
+                                <input type="number" id="rabNominal" class="w-full p-3 rounded-lg bg-slate-700 border border-slate-600 text-emerald-400 font-bold focus:outline-none cursor-not-allowed" readonly>
+                            </div>
+                            <button type="submit" id="submitRabBtn" class="w-full py-3 bg-emerald-500 hover:bg-emerald-600 rounded-lg font-semibold transition">Simpan Item RAB</button>
+                        </form>
+                    </div>
+
+                    <div class="lg:col-span-2 bg-slate-800 p-6 rounded-xl shadow-lg w-full overflow-hidden">
+                        <h3 class="text-xl mb-4 text-emerald-400">Daftar Anggaran Saat Ini</h3>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse min-w-[500px]">
+                                <thead>
+                                    <tr class="border-b border-slate-700 text-slate-400 text-sm">
+                                        <th class="py-3 px-2">Kategori/Item</th>
+                                        <th class="py-3 px-2 text-center">Qty</th>
+                                        <th class="py-3 px-2 text-right">Harga @</th>
+                                        <th class="py-3 px-2 text-right">Total Anggaran</th>
+                                        <th class="py-3 px-2 text-center">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="rabTableBody"></tbody>
+                            </table>
                         </div>
-
-                        <div>
-                            <label class="block text-sm text-emerald-400 mb-1 font-semibold">Total Anggaran (Otomatis)</label>
-                            <!-- Dibuat readonly agar user tidak bisa mengubah manual hasil perkalian -->
-                            <input type="number" id="rabNominal" class="w-full p-3 rounded-lg bg-slate-700 border border-slate-600 text-emerald-400 font-bold focus:outline-none cursor-not-allowed" readonly>
-                        </div>
-
-                        <button type="submit" id="submitRabBtn" class="w-full py-3 bg-emerald-500 hover:bg-emerald-600 rounded-lg font-semibold transition">Simpan Item RAB</button>
-                    </form>
-                </div>
-
-                <!-- List RAB Terdaftar -->
-                <div class="lg:col-span-2 bg-slate-800 p-6 rounded-xl shadow-lg">
-                    <h3 class="text-xl mb-4 text-emerald-400">Daftar Anggaran Saat Ini</h3>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left">
-                            <thead>
-                                <tr class="border-b border-slate-700 text-slate-400 text-sm">
-                                    <th class="py-3 px-2">Kategori/Item</th>
-                                    <th class="py-3 px-2 text-center">Qty</th>
-                                    <th class="py-3 px-2 text-right">Harga @</th>
-                                    <th class="py-3 px-2 text-right">Total Anggaran</th>
-                                    <th class="py-3 px-2 text-center">Aksi</th> <!-- TAMBAHAN INI -->
-                                </tr>
-                            </thead>
-                            <tbody id="rabTableBody">
-                               
-                            </tbody>
-                        </table>
                     </div>
                 </div>
+
             </div>
         </div>
     </main>
 
     <div id="toast-container" class="fixed bottom-5 right-5 space-y-2 z-50"></div>
     
+    <!-- MODAL EDIT RAB -->
+    <div id="editRabModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden flex justify-center items-center z-50 transition-opacity">
+        <div class="bg-slate-800 p-6 md:p-8 rounded-xl shadow-2xl w-11/12 max-w-md transform transition-all">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-emerald-400">Edit Item RAB</h2>
+                <button onclick="closeRabModal()" class="text-slate-400 hover:text-white">✖</button>
+            </div>
+            <form id="editRabForm" class="space-y-4">
+                <input type="hidden" id="editRabRowNumber">
+                <div>
+                    <label class="block text-sm text-slate-400 mb-1">Kategori</label>
+                    <select id="editRabKategori" class="w-full p-3 rounded-lg bg-slate-900 border border-slate-700 focus:border-emerald-500 focus:outline-none">
+                         <option value="kebutuhan_harian">Kebutuhan Harian</option>
+                         <option value="pengalaman_baru">Dana Pengalaman Baru</option>
+                         <option value="operasional_bisnis">Operasional Bisnis</option>
+                         <option value="kebutuhan_rumah">Kebutuhan Rumah</option>
+                         <option value="KULIAH">Kuliah</option>
+                         <option value="Pribadi">Pribadi</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm text-slate-400 mb-1">Nama Item</label>
+                    <input type="text" id="editRabItem" class="w-full p-3 rounded-lg bg-slate-900 border border-slate-700 focus:border-emerald-500 focus:outline-none">
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm text-slate-400 mb-1">Qty</label>
+                        <input type="number" id="editRabQty" class="w-full p-3 rounded-lg bg-slate-900 border border-slate-700 focus:border-emerald-500 focus:outline-none" min="1" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm text-slate-400 mb-1">Harga per @ (Rp)</label>
+                        <input type="number" id="editRabHarga" class="w-full p-3 rounded-lg bg-slate-900 border border-slate-700 focus:border-emerald-500 focus:outline-none" required>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm text-emerald-400 mb-1 font-semibold">Total Anggaran</label>
+                    <input type="number" id="editRabNominal" class="w-full p-3 rounded-lg bg-slate-700 border border-slate-600 text-emerald-400 font-bold focus:outline-none cursor-not-allowed" readonly>
+                </div>
+                <button type="submit" id="saveEditRabBtn" class="w-full py-3 bg-emerald-500 hover:bg-emerald-600 rounded-lg font-semibold transition">Update RAB</button>
+            </form>
+        </div>
+    </div>
+
     <script src="js/main.js"></script>
     <script src="js/api.js"></script>
-    
-   <!-- Logika Khusus untuk Halaman RAB -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const qtyInput = document.getElementById('rabQty');
@@ -105,7 +161,6 @@
             const submitBtn = document.getElementById('submitRabBtn');
             const rabTableBody = document.getElementById('rabTableBody');
 
-            // FUNGSI 1: Hitung otomatis form input baru
             function calculateTotal() {
                 const qty = parseFloat(qtyInput.value) || 0;
                 const harga = parseFloat(hargaInput.value) || 0;
@@ -114,48 +169,33 @@
             qtyInput.addEventListener('input', calculateTotal);
             hargaInput.addEventListener('input', calculateTotal);
 
-            // FUNGSI 2: Memuat Data ke Tabel
             window.loadRABData = async function() {
                 rabTableBody.innerHTML = '<tr><td colspan="5" class="text-center py-4 text-slate-400">Memuat data dari database...</td></tr>';
                 try {
                     const data = await fetchRAB();
                     rabTableBody.innerHTML = ''; 
-
                     if (data.length === 0) {
                         rabTableBody.innerHTML = '<tr><td colspan="5" class="text-center py-4 text-slate-500">Belum ada item anggaran.</td></tr>';
                         return;
                     }
-
                     data.forEach(item => {
-                        // Antisipasi jika ada spasi pada kategori lama, kita ubah jadi underscore
                         const kategoriID = item.kategori.toLowerCase().replace(/ /g, '_');
-                        
                         const tr = document.createElement('tr');
                         tr.className = "border-b border-slate-700/50 text-sm hover:bg-slate-700/30 transition";
                         tr.innerHTML = `
-                            <td class="py-3 px-2">
-                                <div class="font-semibold text-emerald-400">${item.kategori.replace(/_/g, ' ').toUpperCase()}</div>
-                                <div class="text-xs text-slate-300">${item.item || '-'}</div>
-                            </td>
+                            <td class="py-3 px-2"><div class="font-semibold text-emerald-400">${item.kategori.replace(/_/g, ' ').toUpperCase()}</div><div class="text-xs text-slate-300">${item.item || '-'}</div></td>
                             <td class="py-3 px-2 text-center">${item.qty}</td>
-                            <td class="py-3 px-2 text-right">Rp ${item.harga_satuan.toLocaleString('id-ID')}</td>
-                            <td class="py-3 px-2 text-right font-bold text-emerald-400">Rp ${item.nominal.toLocaleString('id-ID')}</td>
-                            <td class="py-3 px-2 text-center">
-                                <button onclick="openRabModal(${item.rowNumber}, '${kategoriID}', '${item.item || ''}', ${item.qty}, ${item.harga_satuan}, ${item.nominal})" class="text-slate-400 hover:text-emerald-400 transition" title="Edit RAB">
-                                    ✏️
-                                </button>
-                            </td>
+                            <td class="py-3 px-2 text-right whitespace-nowrap">Rp ${item.harga_satuan.toLocaleString('id-ID')}</td>
+                            <td class="py-3 px-2 text-right font-bold text-emerald-400 whitespace-nowrap">Rp ${item.nominal.toLocaleString('id-ID')}</td>
+                            <td class="py-3 px-2 text-center"><button onclick="openRabModal(${item.rowNumber}, '${kategoriID}', '${item.item || ''}', ${item.qty}, ${item.harga_satuan}, ${item.nominal})" class="text-slate-400 hover:text-emerald-400 transition" title="Edit RAB">✏️</button></td>
                         `;
                         rabTableBody.appendChild(tr);
                     });
-                } catch (error) {
-                    rabTableBody.innerHTML = '<tr><td colspan="5" class="text-center py-4 text-red-400">Gagal memuat data. Periksa koneksi.</td></tr>';
-                }
+                } catch (error) { rabTableBody.innerHTML = '<tr><td colspan="5" class="text-center py-4 text-red-400">Gagal memuat data.</td></tr>'; }
             }
 
-            loadRABData(); // Panggil saat awal dimuat
+            loadRABData(); 
 
-            // FUNGSI 3: Submit RAB Baru
             if(formRAB) {
                 formRAB.addEventListener('submit', async (e) => {
                     e.preventDefault();
@@ -166,7 +206,6 @@
                         harga_satuan: parseFloat(hargaInput.value),
                         nominal_total: parseFloat(totalInput.value) 
                     };
-
                     const originalText = submitBtn.innerHTML;
                     submitBtn.innerHTML = "Menyimpan...";
                     submitBtn.classList.replace('bg-emerald-500', 'bg-slate-500');
@@ -178,9 +217,8 @@
                         formRAB.reset();
                         totalInput.value = ""; 
                         await loadRABData(); 
-                    } catch (error) {
-                        showToast("Gagal menyimpan data", "error");
-                    } finally {
+                    } catch (error) { showToast("Gagal menyimpan data", "error"); } 
+                    finally {
                         submitBtn.innerHTML = originalText;
                         submitBtn.classList.replace('bg-slate-500', 'bg-emerald-500');
                         submitBtn.disabled = false;
@@ -188,16 +226,12 @@
                 });
             }
 
-            // ==========================================
-            // LOGIKA MODAL EDIT RAB
-            // ==========================================
             const rabModal = document.getElementById('editRabModal');
             const editRabQty = document.getElementById('editRabQty');
             const editRabHarga = document.getElementById('editRabHarga');
             const editRabNominal = document.getElementById('editRabNominal');
             const formEditRab = document.getElementById('editRabForm');
 
-            // Kalkulasi otomatis di dalam Modal Edit
             function calculateEditTotal() {
                 const q = parseFloat(editRabQty.value) || 0;
                 const h = parseFloat(editRabHarga.value) || 0;
@@ -206,7 +240,6 @@
             editRabQty.addEventListener('input', calculateEditTotal);
             editRabHarga.addEventListener('input', calculateEditTotal);
 
-            // Buka Modal & Lempar Data
             window.openRabModal = function(rowNum, kategori, item, qty, harga, total) {
                 document.getElementById('editRabRowNumber').value = rowNum;
                 document.getElementById('editRabKategori').value = kategori;
@@ -217,18 +250,13 @@
                 rabModal.classList.remove('hidden');
             }
 
-            // Tutup Modal
-            window.closeRabModal = function() {
-                rabModal.classList.add('hidden');
-            }
+            window.closeRabModal = function() { rabModal.classList.add('hidden'); }
 
-            // Submit Edit RAB
             if(formEditRab) {
                 formEditRab.addEventListener('submit', async (e) => {
                     e.preventDefault();
                     const btnEdit = document.getElementById('saveEditRabBtn');
                     const origText = btnEdit.innerHTML;
-                    
                     btnEdit.innerHTML = "Mengupdate...";
                     btnEdit.classList.replace('bg-emerald-500', 'bg-slate-500');
                     btnEdit.disabled = true;
@@ -246,10 +274,9 @@
                         await editRABData(updateData);
                         showToast("RAB berhasil diupdate!", "success");
                         closeRabModal();
-                        await loadRABData(); // Refresh tabel
-                    } catch (error) {
-                        showToast("Gagal mengupdate RAB", "error");
-                    } finally {
+                        await loadRABData(); 
+                    } catch (error) { showToast("Gagal mengupdate RAB", "error"); } 
+                    finally {
                         btnEdit.innerHTML = origText;
                         btnEdit.classList.replace('bg-slate-500', 'bg-emerald-500');
                         btnEdit.disabled = false;
@@ -258,55 +285,5 @@
             }
         });
     </script>
-
-
-    <!-- MODAL EDIT RAB -->
-    <div id="editRabModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden flex justify-center items-center z-50 transition-opacity">
-        <div class="bg-slate-800 p-8 rounded-xl shadow-2xl w-full max-w-md transform transition-all">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-bold text-emerald-400">Edit Item RAB</h2>
-                <button onclick="closeRabModal()" class="text-slate-400 hover:text-white">✖</button>
-            </div>
-            
-            <form id="editRabForm" class="space-y-4">
-                <input type="hidden" id="editRabRowNumber">
-                
-                <div>
-                    <label class="block text-sm text-slate-400 mb-1">Kategori</label>
-                    <select id="editRabKategori" class="w-full p-3 rounded-lg bg-slate-900 border border-slate-700 focus:border-emerald-500 focus:outline-none">
-                         <option value="kebutuhan_harian">Kebutuhan Harian</option>
-                            <option value="pengalaman_baru">Dana Pengalaman Baru</option>
-                            <option value="operasional_bisnis">Operasional Bisnis</option>
-                            <option value="kebutuhan_rumah">Kebutuhan Rumah</option>
-                            <option value="KULIAH">Kuliah</option>
-                            <option value="Pribadi">Pribadi</option>
-                    </select>
-                </div>
-                
-                <div>
-                    <label class="block text-sm text-slate-400 mb-1">Nama Item</label>
-                    <input type="text" id="editRabItem" class="w-full p-3 rounded-lg bg-slate-900 border border-slate-700 focus:border-emerald-500 focus:outline-none">
-                </div>
-
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm text-slate-400 mb-1">Qty</label>
-                        <input type="number" id="editRabQty" class="w-full p-3 rounded-lg bg-slate-900 border border-slate-700 focus:border-emerald-500 focus:outline-none" min="1" required>
-                    </div>
-                    <div>
-                        <label class="block text-sm text-slate-400 mb-1">Harga per @ (Rp)</label>
-                        <input type="number" id="editRabHarga" class="w-full p-3 rounded-lg bg-slate-900 border border-slate-700 focus:border-emerald-500 focus:outline-none" required>
-                    </div>
-                </div>
-
-                <div>
-                    <label class="block text-sm text-emerald-400 mb-1 font-semibold">Total Anggaran</label>
-                    <input type="number" id="editRabNominal" class="w-full p-3 rounded-lg bg-slate-700 border border-slate-600 text-emerald-400 font-bold focus:outline-none cursor-not-allowed" readonly>
-                </div>
-
-                <button type="submit" id="saveEditRabBtn" class="w-full py-3 bg-emerald-500 hover:bg-emerald-600 rounded-lg font-semibold transition">Update RAB</button>
-            </form>
-        </div>
-    </div>
 </body>
 </html>

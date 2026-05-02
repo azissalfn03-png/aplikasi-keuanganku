@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catat Transaksi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-slate-900 text-slate-100 font-poppins flex h-screen">
+
+    <aside class="w-64 bg-slate-800 p-6 flex flex-col space-y-4">
+        <h1 class="text-2xl font-bold text-emerald-400 mb-6">FinDash.</h1>
+        <a href="index.html" class="p-3 bg-emerald-500 rounded text-white font-semibold">📊 Dashboard</a>
+        <a href="transaksi.html" class="p-3 hover:bg-slate-700 rounded transition">💸 Catat Transaksi</a>
+        <a href="rab.html" class="p-3 hover:bg-slate-700 rounded transition">📋 Rencana Anggaran</a>
+        <a href="laporan.html" class="p-3 hover:bg-slate-700 rounded transition">📈 Analisis & Laporan</a>
+        <a href="riwayat.html" class="p-3 hover:bg-slate-700 rounded transition">🕰️ Riwayat Transaksi</a>
+    </aside>
+
+    <!-- Konten Utama -->
+    <main class="flex-1 p-10 flex justify-center items-center">
+        <div class="bg-slate-800 p-8 rounded-xl shadow-2xl w-full max-w-md">
+            <h2 class="text-2xl font-bold text-emerald-400 mb-6 text-center">Catat Transaksi</h2>
+            
+            <!-- Form yang dimodifikasi untuk client-side validation -->
+            <form id="financeForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm text-slate-400 mb-1">Keterangan</label>
+                    <input type="text" id="keterangan" class="w-full p-3 rounded-lg bg-slate-900 border border-slate-700 focus:border-emerald-500 focus:outline-none" placeholder="Cth: Shift Malam" required>
+                </div>
+                
+                <div>
+                    <label class="block text-sm text-slate-400 mb-1">Jenis Arus Kas</label>
+                    <select id="jenis" class="w-full p-3 rounded-lg bg-slate-900 border border-slate-700 focus:border-emerald-500 focus:outline-none">
+                        <option value="masuk">Uang Masuk (+)</option>
+                        <option value="keluar">Uang Keluar (-)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm text-slate-400 mb-1">Kategori</label>
+                    <select id="kategori" class="w-full p-3 rounded-lg bg-slate-900 border border-slate-700 focus:border-emerald-500 focus:outline-none">
+                        <option value="gaji_angkringan">Gaji Angkringan</option>
+                        <option value="penjualan_trial">Bisnis Trial App</option>
+                        <option value="pengalaman_baru">Dana Pengalaman Baru</option>
+                        <option value="kebutuhan_harian">Kebutuhan Harian</option>
+                        <option value="operasional_bisnis">Operasional Bisnis</option>
+                        <option value="kebutuhan_rumah">Kebutuhan Rumah</option>
+                        <option value="KULIAH">Kuliah</option>
+                        <option value="Pribadi">Pribadi</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="block text-sm text-slate-400 mb-1">Nominal (Rp)</label>
+                    <input type="number" id="nominal" class="w-full p-3 rounded-lg bg-slate-900 border border-slate-700 focus:border-emerald-500 focus:outline-none" placeholder="50000" min="1" required>
+                </div>
+                
+                <button type="submit" id="submitBtn" class="w-full py-3 mt-4 bg-emerald-500 hover:bg-emerald-600 rounded-lg font-semibold transition duration-300">
+                    Simpan Transaksi
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <div id="toast-container" class="fixed bottom-5 right-5 space-y-2 z-50"></div>
+    <script src="js/main.js"></script>
+    <script src="js/api.js"></script>
+</body>
+</html>

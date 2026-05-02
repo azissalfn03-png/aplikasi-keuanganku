@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riwayat Transaksi - FinDash</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-slate-900 text-slate-100 font-poppins flex h-screen">
+
+    <!-- Sidebar Navigasi -->
+    <aside class="w-64 bg-slate-800 p-6 flex flex-col space-y-4">
+        <h1 class="text-2xl font-bold text-emerald-400 mb-6">FinDash.</h1>
+        <a href="index.html" class="p-3 hover:bg-slate-700 rounded transition">📊 Dashboard</a>
+        <a href="transaksi.html" class="p-3 hover:bg-slate-700 rounded transition">💸 Catat Transaksi</a>
+        <a href="rab.html" class="p-3 hover:bg-slate-700 rounded transition">📋 Rencana Anggaran</a>
+        <a href="laporan.html" class="p-3 hover:bg-slate-700 rounded transition">📈 Analisis & Laporan</a>
+        <a href="riwayat.html" class="p-3 bg-emerald-500 rounded text-white font-semibold">🕰️ Riwayat Transaksi</a>
+    </aside>
+
+    <!-- Konten Utama -->
+    <main class="flex-1 p-10 overflow-y-auto">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-3xl font-semibold mb-6">Riwayat Transaksi</h2>
+            
+            <div class="bg-slate-800 rounded-xl shadow-lg overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-slate-700/50">
+                            <tr>
+                                <th class="p-4 text-slate-300 font-medium">Tanggal</th>
+                                <th class="p-4 text-slate-300 font-medium">Keterangan</th>
+                                <th class="p-4 text-slate-300 font-medium">Kategori</th>
+                                <th class="p-4 text-slate-300 font-medium text-center">Jenis</th>
+                                <th class="p-4 text-slate-300 font-medium text-right">Nominal</th>
+                            </tr>
+                        </thead>
+                        <tbody id="riwayatTableBody">
+                            <!-- Data akan dimuat via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+<!-- MODAL EDIT TRANSAKSI (Sembunyi secara default) -->
+    <div id="editModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden flex justify-center items-center z-50 transition-opacity">
+        <div class="bg-slate-800 p-8 rounded-xl shadow-2xl w-full max-w-md transform transition-all">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-emerald-400">Edit Transaksi</h2>
+                <button onclick="closeModal()" class="text-slate-400 hover:text-white">✖</button>
+            </div>
+            
+            <form id="editForm" class="space-y-4">
+                <input type="hidden" id="editRowNumber">
+                <div>
+                    <label class="block text-sm text-slate-400 mb-1">Keterangan</label>
+                    <input type="text" id="editKeterangan" class="w-full p-3 rounded-lg bg-slate-900 border border-slate-700 text-white focus:border-emerald-500 focus:outline-none" required>
+                </div>
+                <div>
+                    <label class="block text-sm text-slate-400 mb-1">Jenis Arus Kas</label>
+                    <select id="editJenis" class="w-full p-3 rounded-lg bg-slate-900 border border-slate-700 text-white focus:border-emerald-500 focus:outline-none">
+                        <option value="masuk">Uang Masuk (+)</option>
+                        <option value="keluar">Uang Keluar (-)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm text-slate-400 mb-1">Kategori</label>
+                    <select id="editKategori" class="w-full p-3 rounded-lg bg-slate-900 border border-slate-700 text-white focus:border-emerald-500 focus:outline-none">
+                        <option value="gaji_angkringan">Gaji Angkringan</option>
+                        <option value="penjualan_trial">Bisnis Trial App</option>
+                        <option value="pengalaman_baru">Dana Pengalaman Baru</option>
+                        <option value="kebutuhan_harian">Kebutuhan Harian</option>
+                        <option value="operasional_bisnis">Operasional Bisnis</option>
+                        <option value="kebutuhan_rumah">Kebutuhan Rumah</option>
+                        <option value="KULIAH">Kuliah</option>
+                        <option value="Pribadi">Pribadi</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm text-slate-400 mb-1">Nominal (Rp)</label>
+                    <input type="number" id="editNominal" class="w-full p-3 rounded-lg bg-slate-900 border border-slate-700 text-white focus:border-emerald-500 focus:outline-none" min="1" required>
+                </div>
+                <button type="submit" id="saveEditBtn" class="w-full py-3 mt-4 bg-emerald-500 hover:bg-emerald-600 rounded-lg font-semibold transition duration-300">Update Data</button>
+            </form>
+        </div>
+    </div>
+    <div id="toast-container" class="fixed bottom-5 right-5 space-y-2 z-50"></div>
+
+    <script src="js/main.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/riwayat.js"></script>
+</body>
+</html>

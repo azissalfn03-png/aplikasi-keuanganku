@@ -1,5 +1,5 @@
 // GANTI DENGAN URL DEPLOYMENT APPS SCRIPT ANDA
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwFsO1jYi_HjPdQHhSGNcmpnCuqLG_9d83IyT_KO32tsdoFRem6AyHobwdlv24lJOt3/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyslXGsFWFRQOxIZi2YbHPEokcuQWfXwMZJMTA-fgUQJXhWhQZzF8ExT9tZBZItZvc/exec';
 
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('financeForm');

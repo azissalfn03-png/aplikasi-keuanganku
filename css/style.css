@@ -1,0 +1,180 @@
+/* ==========================================
+   1. GLOBAL STYLES & RESET
+   ========================================== */
+:root {
+    --primary: #10b981;    /* Emerald 500 */
+    --primary-hover: #059669;
+    --bg-dark: #0f172a;    /* Slate 900 */
+    --bg-card: #1e293b;    /* Slate 800 */
+    --text-main: #f1f5f9;
+    --text-muted: #94a3b8;
+    --border: rgba(71, 85, 105, 0.4);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-dark);
+}
+::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+}
+
+/* ==========================================
+   2. FORM & INPUT STYLES (ANTI-KAKU)
+   ========================================== */
+input, select, textarea {
+    font-family: inherit;
+}
+
+/* Glassmorphism Input */
+.glass-input {
+    background: rgba(15, 23, 42, 0.6) !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-input:focus {
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.15);
+    background: rgba(15, 23, 42, 0.8) !important;
+}
+
+/* Kustomisasi Kalender (datetime-local) */
+input[type="datetime-local"] {
+    color-scheme: dark; /* Mengubah popup kalender jadi tema gelap otomatis */
+    position: relative;
+    -webkit-appearance: none;
+}
+
+/* Trick: Membuat area klik luas namun ikon asli tetap tersembunyi */
+::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: auto;
+    height: auto;
+    z-index: 20;
+}
+
+/* ==========================================
+   3. TABEL & RIWAYAT STYLES
+   ========================================= */
+table {
+    width: 100%;
+}
+
+/* Menjaga teks agar tidak meluap */
+td, th {
+    white-space: nowrap;
+}
+
+/* Responsivitas Tabel */
+.overflow-x-auto {
+    scrollbar-width: thin;
+}
+
+/* Styling Baris saat Hover */
+tr.group:hover {
+    background-color: rgba(30, 41, 59, 0.5);
+}
+
+/* ==========================================
+   4. TOAST NOTIFICATIONS
+   ========================================== */
+.toast {
+    min-width: 250px;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+    animation: slideInRight 0.3s ease-out;
+}
+
+.toast.success {
+    background: #064e3b;
+    border-left: 4px solid var(--primary);
+    color: #d1fae5;
+}
+
+.toast.error {
+    background: #7f1d1d;
+    border-left: 4px solid #ef4444;
+    color: #fee2e2;
+}
+
+/* ==========================================
+   5. ANIMATIONS
+   ========================================== */
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.animate-in {
+    animation-duration: 0.3s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
+}
+
+.fade-in {
+    animation-name: fadeIn;
+}
+
+.zoom-in {
+    animation-name: zoomIn;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Glow Effect */
+.text-shadow-glow {
+    text-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+}

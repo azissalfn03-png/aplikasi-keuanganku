@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riwayat Transaksi - FinKWU</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* CSS internal untuk memastikan animasi dan glassmorphism berjalan solid */
+        .glass-input {
+            background: rgba(15, 23, 42, 0.6) !important;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(71, 85, 105, 0.3) !important;
+            transition: all 0.3s ease;
+        }
+        .glass-input:focus {
+            border-color: #10b981 !important;
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.1);
+        }
+        .text-shadow-glow {
+            text-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 font-poppins flex h-screen overflow-hidden">
+
+    <aside class="w-20 lg:w-64 bg-slate-800 flex flex-col flex-shrink-0 transition-all duration-300 ease-in-out border-r border-slate-700 z-40">
+        <div class="p-4 lg:p-6 flex justify-center lg:justify-start items-center mb-4 border-b border-slate-700/50">
+            <h1 class="text-2xl font-bold text-emerald-400 hidden lg:block text-shadow-glow">FinKWU.</h1>
+            <h1 class="text-2xl font-bold text-emerald-400 lg:hidden text-shadow-glow">KWU.</h1>
+        </div>
+        
+        <nav class="flex flex-col space-y-3 px-2 lg:px-4">
+            <a href="index.html" class="p-3 hover:bg-slate-700 rounded-xl transition flex items-center justify-center lg:justify-start gap-4 group">
+                <span class="text-xl group-hover:scale-110 transition-transform">📊</span>
+                <span class="hidden lg:block font-medium">Dashboard</span>
+            </a>
+            
+            <a href="transaksi.html" class="p-3 hover:bg-slate-700 rounded-xl transition flex items-center justify-center lg:justify-start gap-4 group">
+                <span class="text-xl group-hover:scale-110 transition-transform">💸</span>
+                <span class="hidden lg:block font-medium">Catat Transaksi</span>
+            </a>
+            
+            <a href="rab.html" class="p-3 hover:bg-slate-700 rounded-xl transition flex items-center justify-center lg:justify-start gap-4 group">
+                <span class="text-xl group-hover:scale-110 transition-transform">📋</span>
+                <span class="hidden lg:block font-medium">Rencana Anggaran</span>
+            </a>
+            
+            <a href="laporan.html" class="p-3 hover:bg-slate-700 rounded-xl transition flex items-center justify-center lg:justify-start gap-4 group">
+                <span class="text-xl group-hover:scale-110 transition-transform">📈</span>
+                <span class="hidden lg:block font-medium">Analisis & Laporan</span>
+            </a>
+            
+            <a href="riwayat.html" class="p-3 bg-emerald-500 text-white shadow-lg shadow-emerald-500/20 rounded-xl transition flex items-center justify-center lg:justify-start gap-4 group">
+                <span class="text-xl">🕰️</span>
+                <span class="hidden lg:block font-medium text-shadow">Riwayat Transaksi</span>
+            </a>
+        </nav>
+        
+        <div class="mt-auto p-4 border-t border-slate-700/50">
+            <div class="flex items-center gap-3 px-2 py-3 bg-slate-900/50 rounded-xl border border-slate-700/30">
+                <div class="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 font-bold text-xs">AA</div>
+                <div class="hidden lg:block overflow-hidden">
+                    <p class="text-xs font-bold truncate">Alfan Azis</p>
+                    <p class="text-[10px] text-slate-500 truncate">Admin FinDash</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <main class="flex-1 p-4 md:p-8 overflow-y-auto">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex justify-between items-center mb-8">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-100">Riwayat Transaksi</h2>
+                    <p class="text-sm text-slate-500">Pantau semua arus kas masuk dan keluar</p>
+                </div>
+                <button onclick="loadRiwayatData()" class="p-3 bg-slate-800 hover:bg-slate-700 rounded-xl border border-slate-700 text-emerald-400 transition-all active:scale-90" title="Refresh Data">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="bg-slate-800 rounded-2xl border border-slate-700 shadow-2xl overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-900/50 text-[10px] font-bold uppercase text-slate-500 tracking-[0.2em] border-b border-slate-700">
+                                <th class="p-4 px-6">Tanggal</th>
+                                <th class="p-4">Keterangan</th>
+                                <th class="p-4">Kategori</th>
+                                <th class="p-4 text-center">Jenis</th>
+                                <th class="p-4 text-right">Nominal</th>
+                                <th class="p-4 text-center">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="riwayatTableBody" class="divide-y divide-slate-700/50">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="editModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-800 w-full max-w-md rounded-2xl border border-slate-700 shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200">
+            <div class="p-6 border-b border-slate-700 flex justify-between items-center bg-slate-900/30">
+                <h3 class="text-emerald-400 font-bold uppercase tracking-widest text-sm">Update Transaksi</h3>
+                <button onclick="closeModal()" class="text-slate-500 hover:text-white transition-colors">✕</button>
+            </div>
+            
+            <form id="editForm" class="p-6 space-y-5">
+                <input type="hidden" id="editRowNumber">
+                <input type="hidden" id="editTanggalAsli">
+
+                <div>
+                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 tracking-widest ml-1">Keterangan</label>
+                    <input type="text" id="editKeterangan" class="w-full p-3.5 rounded-xl bg-slate-900 border border-slate-700 text-white outline-none focus:border-emerald-500 transition-all text-sm" placeholder="Keterangan transaksi">
+                </div>
+
+                <div class="pt-1">
+                    <label class="flex items-center cursor-pointer w-fit group mb-2">
+                        <input type="checkbox" id="editUseCustomDate" class="w-4 h-4 text-emerald-500 bg-slate-900 border-slate-700 rounded cursor-pointer focus:ring-emerald-500">
+                        <span class="ml-2 text-[11px] text-slate-400 group-hover:text-emerald-400 transition-colors">Ubah Tanggal/Waktu</span>
+                    </label>
+                    
+                    <div id="editCustomDateContainer" class="hidden animate-in fade-in slide-in-from-top-2 duration-300">
+                        <div class="relative h-12 group/date">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-emerald-500 z-20">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <input type="datetime-local" id="editTanggalBaru" class="glass-input absolute inset-0 w-full pl-10 pr-4 rounded-xl text-slate-200 outline-none cursor-pointer text-sm z-10">
+                            <div class="absolute -inset-0.5 bg-emerald-500/10 rounded-xl blur opacity-0 group-hover/date:opacity-100 transition duration-500"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 tracking-widest ml-1">Jenis</label>
+                        <select id="editJenis" class="w-full p-3.5 rounded-xl bg-slate-900 border border-slate-700 text-white outline-none focus:border-emerald-500 text-sm appearance-none cursor-pointer">
+                            <option value="masuk">Uang Masuk (+)</option>
+                            <option value="keluar">Uang Keluar (-)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 tracking-widest ml-1">Nominal (Rp)</label>
+                        <input type="number" id="editNominal" class="w-full p-3.5 rounded-xl bg-slate-900 border border-slate-700 text-white outline-none focus:border-emerald-500 text-sm">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1 tracking-widest ml-1">Kategori</label>
+                    <select id="editKategori" class="w-full p-3.5 rounded-xl bg-slate-900 border border-slate-700 text-white outline-none focus:border-emerald-500 text-sm appearance-none cursor-pointer">
+                        <option value="Gaji Angkringan">Gaji Angkringan</option>
+                        <option value="Bisnis Trial App">Bisnis Trial App</option>
+                        <option value="Dana Pengalaman Baru">Dana Pengalaman Baru</option>
+                        <option value="Kebutuhan Harian">Kebutuhan Harian</option>
+                        <option value="Operasional Bisnis">Operasional Bisnis</option>
+                        <option value="Kuliah">Kuliah</option>
+                        <option value="Pribadi">Pribadi</option>
+                    </select>
+                </div>
+
+                <button type="submit" id="saveEditBtn" class="w-full py-4 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl font-bold transition-all shadow-lg shadow-emerald-500/20 active:scale-95 uppercase text-[10px] tracking-widest">
+                    Simpan Perubahan
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast-container" class="fixed bottom-5 right-5 space-y-2 z-50"></div>
+    <script src="js/api.js"></script>
+    <script src="js/riwayat.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

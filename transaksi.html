@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catat Transaksi - FinKWU</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Tambahan CSS internal agar layout tetap solid */
+        .glass-input {
+            background: rgba(15, 23, 42, 0.6) !important;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(71, 85, 105, 0.3) !important;
+            transition: all 0.3s ease;
+        }
+        .glass-input:focus {
+            border-color: #10b981 !important;
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 font-poppins flex h-screen overflow-hidden">
+
+    <aside class="w-20 lg:w-64 bg-slate-800 flex flex-col flex-shrink-0 transition-all duration-300 ease-in-out border-r border-slate-700 z-40">
+        <div class="p-4 lg:p-6 flex justify-center lg:justify-start items-center mb-4 border-b border-slate-700/50">
+            <h1 class="text-2xl font-bold text-emerald-400 hidden lg:block text-shadow-glow">FinKWU.</h1>
+            <h1 class="text-2xl font-bold text-emerald-400 lg:hidden text-shadow-glow">KWU.</h1>
+        </div>
+        
+        <nav class="flex flex-col space-y-3 px-2 lg:px-4">
+            <a href="index.html" class="p-3 hover:bg-slate-700 rounded-xl transition flex items-center justify-center lg:justify-start gap-4 group">
+                <span class="text-xl group-hover:scale-110 transition-transform">📊</span>
+                <span class="hidden lg:block font-medium">Dashboard</span>
+            </a>
+            
+            <a href="transaksi.html" class="p-3 bg-emerald-500 text-white shadow-lg shadow-emerald-500/20 rounded-xl transition flex items-center justify-center lg:justify-start gap-4 group">
+                <span class="text-xl">💸</span>
+                <span class="hidden lg:block font-medium text-shadow">Catat Transaksi</span>
+            </a>
+            
+            <a href="rab.html" class="p-3 hover:bg-slate-700 rounded-xl transition flex items-center justify-center lg:justify-start gap-4 group">
+                <span class="text-xl group-hover:scale-110 transition-transform">📋</span>
+                <span class="hidden lg:block font-medium">Rencana Anggaran</span>
+            </a>
+            
+            <a href="laporan.html" class="p-3 hover:bg-slate-700 rounded-xl transition flex items-center justify-center lg:justify-start gap-4 group">
+                <span class="text-xl group-hover:scale-110 transition-transform">📈</span>
+                <span class="hidden lg:block font-medium">Analisis & Laporan</span>
+            </a>
+            
+            <a href="riwayat.html" class="p-3 hover:bg-slate-700 rounded-xl transition flex items-center justify-center lg:justify-start gap-4 group">
+                <span class="text-xl group-hover:scale-110 transition-transform">🕰️</span>
+                <span class="hidden lg:block font-medium">Riwayat Transaksi</span>
+            </a>
+        </nav>
+        
+        <div class="mt-auto p-4 border-t border-slate-700/50">
+            <div class="flex items-center gap-3 px-2 py-3 bg-slate-900/50 rounded-xl border border-slate-700/30">
+                <div class="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 font-bold text-xs">
+                    AA
+                </div>
+                <div class="hidden lg:block overflow-hidden">
+                    <p class="text-xs font-bold truncate">Alfan Azis</p>
+                    <p class="text-[10px] text-slate-500 truncate">Admin FinDash</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <main class="flex-1 p-4 md:p-8 overflow-y-auto flex justify-center items-center relative">
+        <div class="bg-slate-800 p-8 rounded-2xl shadow-2xl w-full max-w-md border border-slate-700">
+            <h2 class="text-2xl font-bold text-emerald-400 mb-6 text-center">Catat Transaksi Baru</h2>
+            
+            <form id="formCatatTransaksi" class="space-y-4">
+                <div>
+                    <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1 ml-1">Keterangan</label>
+                    <input type="text" id="keterangan" class="w-full p-3.5 rounded-xl bg-slate-900 border border-slate-700 text-white focus:border-emerald-500 focus:outline-none transition-all" placeholder="Cth: Shift Malam Angkringan" required>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1 ml-1">Jenis</label>
+                        <select id="jenis" class="w-full p-3.5 rounded-xl bg-slate-900 border border-slate-700 text-white focus:border-emerald-500 focus:outline-none appearance-none cursor-pointer">
+                            <option value="masuk">Uang Masuk (+)</option>
+                            <option value="keluar">Uang Keluar (-)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1 ml-1">Nominal (Rp)</label>
+                        <input type="number" id="nominal" class="w-full p-3.5 rounded-xl bg-slate-900 border border-slate-700 text-white focus:border-emerald-500 focus:outline-none transition-all" placeholder="0" min="1" required>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1 ml-1">Kategori</label>
+                    <select id="kategori" class="w-full p-3.5 rounded-xl bg-slate-900 border border-slate-700 text-white focus:border-emerald-500 focus:outline-none appearance-none cursor-pointer">
+                        <option value="Gaji Angkringan">Gaji Angkringan</option>
+                        <option value="Bisnis Trial App">Bisnis Trial App</option>
+                        <option value="Dana Pengalaman Baru">Dana Pengalaman Baru</option>
+                        <option value="Kebutuhan Harian">Kebutuhan Harian</option>
+                        <option value="Operasional Bisnis">Operasional Bisnis</option>
+                        <option value="Kuliah">Kuliah</option>
+                        <option value="Pribadi">Pribadi</option>
+                    </select>
+                </div>
+
+                <div class="pt-2">
+                    <label class="flex items-center cursor-pointer w-fit group">
+                        <input type="checkbox" id="useCustomDate" class="w-4 h-4 text-emerald-500 bg-slate-900 border-slate-700 rounded focus:ring-emerald-500 focus:outline-none cursor-pointer">
+                        <span class="ml-2 text-sm text-slate-400 group-hover:text-emerald-400 transition-colors">Masukkan di hari/tanggal lain</span>
+                    </label>
+                </div>
+                
+                <div id="customDateContainer" class="hidden animate-in fade-in zoom-in duration-300">
+                    <div class="relative h-12 mt-2 group">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500 group-focus-within:text-emerald-500 transition-colors z-20">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        <input type="datetime-local" id="customDate" 
+                            class="glass-input absolute inset-0 w-full pl-10 pr-4 rounded-xl text-slate-200 outline-none cursor-pointer z-10 text-sm">
+                        <div class="absolute -inset-0.5 bg-emerald-500/10 rounded-xl blur opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                    </div>
+                    <p class="mt-2 text-[10px] text-slate-500 italic ml-1">*Klik untuk membuka kalender kustom</p>
+                </div>
+
+                <button type="submit" id="submitBtn" class="w-full py-4 mt-6 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl font-bold shadow-lg shadow-emerald-500/20 transition-all active:scale-95 uppercase tracking-widest text-xs">
+                    Simpan Transaksi
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <div id="toast-container" class="fixed bottom-5 right-5 space-y-2 z-50"></div>
+    
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const checkDate = document.getElementById('useCustomDate');
+            const container = document.getElementById('customDateContainer');
+            const dateInput = document.getElementById('customDate');
+            const form = document.getElementById('formCatatTransaksi');
+            const btn = document.getElementById('submitBtn');
+
+            // Logic Toggle Kalender
+            checkDate.addEventListener('change', () => {
+                if (checkDate.checked) {
+                    container.classList.remove('hidden');
+                    dateInput.required = true;
+                } else {
+                    container.classList.add('hidden');
+                    dateInput.required = false;
+                    dateInput.value = '';
+                }
+            });
+
+            // Handle Submit Form
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const originalText = btn.innerHTML;
+                btn.innerHTML = "Menyimpan ke Sheets...";
+                btn.disabled = true;
+                btn.classList.replace('bg-emerald-500', 'bg-slate-600');
+
+                const katSelect = document.getElementById('kategori');
+                const kategoriText = katSelect.options[katSelect.selectedIndex].text;
+
+                const payload = {
+                    action: 'saveTransaksi',
+                    keterangan: document.getElementById('keterangan').value,
+                    jenis: document.getElementById('jenis').value,
+                    kategori: kategoriText,
+                    nominal: Number(document.getElementById('nominal').value),
+                    tanggal_manual: checkDate.checked ? dateInput.value : null
+                };
+
+                try {
+                    const response = await fetch(SCRIPT_URL, {
+                        method: 'POST',
+                        body: JSON.stringify(payload)
+                    });
+                    const result = await response.json();
+
+                    if (result.status === 'success') {
+                        showToast("Transaksi Berhasil Dicatat!", "success");
+                        form.reset();
+                        container.classList.add('hidden');
+                    } else {
+                        throw new Error(result.message);
+                    }
+                } catch (error) {
+                    showToast("Error: " + error.message, "error");
+                } finally {
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                    btn.classList.replace('bg-slate-600', 'bg-emerald-500');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
